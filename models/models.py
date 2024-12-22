@@ -6,11 +6,11 @@ from typing import Optional
 class Thread:
     thread_number: int
     posts: list[str]
-    embedding: Optional[tuple[float]] = None
+    semantic_embedding: Optional[tuple[float]] = None
 
 @dataclass
 class Board:
     board_name: str
     threads: list[Thread]
-    embedding: Optional[tuple[float]] = None
+    semantic_embedding: Optional[tuple[float]] = None
 
