@@ -3,7 +3,7 @@ import pyodbc
 from models.models import Board, Thread
 
 
-class DbRetriever:
+class SQLAccess:
 
     def __init__(self, connection: pyodbc.Connection):
         self.connection = connection
