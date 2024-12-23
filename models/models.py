@@ -4,14 +4,14 @@ from typing import Optional
 
 @dataclass
 class Thread:
-    thread_title: str
     thread_number: int
-    posts: list[str]
+    thread_title: Optional[str] = None
+    posts: Optional[list[str]] = None
     semantic_embedding: Optional[tuple[float]] = None
 
 @dataclass
 class Board:
     board_name: str
-    threads: list[Thread]
+    threads: Optional[list[Thread]] = None
     semantic_embedding: Optional[tuple[float]] = None
 
