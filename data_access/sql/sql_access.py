@@ -9,7 +9,7 @@ class SQLAccess:
         self.connection = connection
         self.cursor = connection.cursor()
 
-    def _get_threads(self, board: Board, thread_amount: int):
+    def     _get_threads(self, board: Board, thread_amount: int):
         rows = self.cursor.execute('EXEC uspGetTopThreads ?, ?', (board.board_name, thread_amount))
         return rows.fetchall()
 
@@ -25,9 +25,11 @@ class SQLAccess:
         threads = self._get_threads(board, thread_amount)
 
         for thread in threads:
-            thread_number = int(thread[0])
+            thread_title = thread[0]
+            thread_number = int(thread[1])
             thread_posts = self._get_replies_from_thread(board, thread_number, reply_amount, min_words_per_reply)
             thread_posts = [post[0] for post in thread_posts]
-            board.threads.append(Thread(thread_number, thread_posts))
+
+            board.threads.append(Thread(thread_title, thread_number, thread_posts))
 
         return board

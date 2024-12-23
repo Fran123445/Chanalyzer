@@ -4,6 +4,7 @@ from typing import Optional
 
 @dataclass
 class Thread:
+    thread_title: str
     thread_number: int
     posts: list[str]
     semantic_embedding: Optional[tuple[float]] = None

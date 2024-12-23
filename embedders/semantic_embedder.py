@@ -36,6 +36,12 @@ class SemanticEmbedder(Embedder):
 
         def calculate_thread_embedding(self, thread: Thread):
             thread_posts = thread.posts
+            title = thread.thread_title
+
+            # I know it's technically not a post but still
+            if title is not None:
+                thread_posts.insert(0, title)
+
             thread_embedding = self.embed(thread_posts)
 
             thread.semantic_embedding = thread_embedding
