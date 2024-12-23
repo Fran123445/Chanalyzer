@@ -1,5 +1,5 @@
-from embedders.embedder import Embedder
-from utils.aggregator import Aggregator
+from services.embedders.embedder import Embedder
+from services.utils.aggregator import Aggregator
 from models.models import Thread, Board
 import numpy as np
 

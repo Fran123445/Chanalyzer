@@ -1,6 +1,6 @@
-from embedders.embedder import Embedder
+from services.embedders.embedder import Embedder
 from sentence_transformers import SentenceTransformer
-from utils.aggregator import Aggregator
+from services.utils.aggregator import Aggregator
 
 class SemanticEmbedder(Embedder):
 
