@@ -37,3 +37,7 @@ class SQLAccess:
             board.threads.append(Thread(thread_number, thread_title, thread_posts))
 
         return board
+
+    def get_boards(self):
+        rows = self.cursor.execute('SELECT board_name FROM Board')
+        return rows.fetchall()
