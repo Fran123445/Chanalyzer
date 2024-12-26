@@ -8,7 +8,7 @@ from services.processor.processor import Processor
 from services.utils.aggregator import Aggregator
 from config import *
 
-# Entry point for (eventually) running this and BoardCrawler using airflow
+# Entry point for testing
 
 connection = pyodbc.connect(f"Driver={SQL_DB_DRIVER};"
                                 f"Server={SQL_DB_SERVER};"
@@ -32,7 +32,7 @@ for board_tuple in boards:
     if board_name == 'f':
         continue
 
-    board = sql_access.get_board_with_threads(board_name, 150, 50, 4)
+    board = sql_access.get_board_with_threads(board_name, THREAD_AMOUNT, POST_AMOUNT, MIN_WORDS_PER_POST)
 
     processor.calculate_board_embedding(board)
 

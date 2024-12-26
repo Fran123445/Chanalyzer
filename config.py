@@ -8,3 +8,7 @@ MONGO_COLLECTION_BOARDS= # e.g. 'Boards'
 MONGO_COLLECTION_THREADS= # e.g. 'Threads'
 
 TRANSFORMER_MODEL_NAME= # e.g. 'distiluse-base-multilingual-cased-v1'
+
+THREAD_AMOUNT= # e.g. 150
+POST_AMOUNT= # e.g. 50
+MIN_WORDS_PER_POST= # e.g. 4
