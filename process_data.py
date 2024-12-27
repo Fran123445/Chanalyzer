@@ -27,6 +27,7 @@ boards = sql_access.get_boards()
 
 for board_tuple in boards:
     board_name = board_tuple[0]
+    print(board_name)
 
     # Again, I'm not dealing with /f/ for now (or never, who knows)
     if board_name == 'f':
