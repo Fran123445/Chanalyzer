@@ -37,3 +37,6 @@ class MongoAccess:
             boards.append(Board(board_name=board_name, semantic_embedding=semantic_embedding))
 
         return boards
+
+    def close_connection(self):
+        self.client.close()

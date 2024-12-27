@@ -7,7 +7,7 @@ class SQLAccess:
 
     def __init__(self, connection: pyodbc.Connection):
         self.connection = connection
-        self.cursor = connection.cursor()
+        self.cursor = connection.cursor() # race condition waiting to happen, should fix it
 
     def _get_threads(self, board: Board, thread_amount: int):
         rows = self.cursor.execute('EXEC uspGetTopThreads ?, ?', (board.board_name, thread_amount))
@@ -34,6 +34,8 @@ class SQLAccess:
             if not thread_posts:
                 continue
 
+            # actually i should check this earlier because this way it's not meeting the min thread amount required
+
             board.threads.append(Thread(thread_number, thread_title, thread_posts))
 
         return board
@@ -41,3 +43,6 @@ class SQLAccess:
     def get_boards(self):
         rows = self.cursor.execute('SELECT board_name FROM Board')
         return rows.fetchall()
+
+    def close_connection(self):
+        self.connection.close()
