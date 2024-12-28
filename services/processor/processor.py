@@ -1,12 +1,18 @@
+from services.data_access.mongo.mongo_access import MongoAccess
+from services.data_access.sql.sql_access import SQLAccess
 from services.embedders.embedder import Embedder
 from services.utils.aggregator import Aggregator
 from models.models import Thread, Board
+from config import *
 import numpy as np
 
 class Processor:
-    def __init__(self, embedder: Embedder, aggregator: Aggregator):
+    def __init__(self, embedder: Embedder, aggregator: Aggregator,
+                sql_access: SQLAccess, mongo_access: MongoAccess):
         self.embedder = embedder
         self.aggregator = aggregator
+        self.sql_access = sql_access
+        self.mongo_access = mongo_access
 
     def calculate_thread_embedding(self, thread: Thread):
         thread_posts = thread.posts
@@ -32,3 +38,8 @@ class Processor:
         board_embedding = self.aggregator.get_average_embedding(np.array(thread_embeddings))
 
         board.semantic_embedding = board_embedding
+
+    def process_board(self, board_name: str):
+        board =self.sql_access.get_board_with_threads(board_name, THREAD_AMOUNT, POST_AMOUNT, MIN_WORDS_PER_POST)
+        self.calculate_board_embedding(board)
+        self.mongo_access.insert_board(board)
