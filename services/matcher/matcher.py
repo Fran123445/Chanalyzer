@@ -17,3 +17,10 @@ class Matcher:
             similarity_dict[board.name] = similarity
 
         return similarity_dict
+
+    def get_top_similar_boards(self, embedding: list, embedding_type: str, top_n: int):
+        similarity_dict = self.calculate_similarities(embedding, embedding_type)
+
+        top_similar_boards = sorted(similarity_dict.items(), key=lambda x: x[1], reverse=True)[:top_n]
+
+        return top_similar_boards
