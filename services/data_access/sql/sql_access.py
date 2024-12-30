@@ -36,7 +36,7 @@ class SQLAccess:
 
             # actually i should check this earlier because this way it's not meeting the min thread amount required
 
-            board.threads.append(Thread(thread_number, thread_title, thread_posts))
+            board.threads.append(Thread(board_name, thread_number, thread_title, thread_posts))
 
         return board
 

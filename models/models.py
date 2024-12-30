@@ -4,6 +4,7 @@ from typing import Optional
 
 @dataclass
 class Thread:
+    board: str
     thread_number: int
     thread_title: Optional[str] = None
     posts: Optional[list[str]] = None
