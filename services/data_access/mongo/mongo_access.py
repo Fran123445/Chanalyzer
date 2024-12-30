@@ -1,5 +1,7 @@
 import pymongo
-from models.models import Board, Thread
+from models.board import Board
+from models.thread import Thread
+
 
 class MongoAccess:
 

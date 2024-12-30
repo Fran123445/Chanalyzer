@@ -2,7 +2,8 @@ from services.data_access.mongo.mongo_access import MongoAccess
 from services.data_access.sql.sql_access import SQLAccess
 from services.embedders.embedder import Embedder
 from services.utils.aggregator import Aggregator
-from models.models import Thread, Board
+from models.board import Board
+from models.thread import Thread
 from config import *
 import numpy as np
 
