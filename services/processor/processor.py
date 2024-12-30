@@ -22,7 +22,7 @@ class Processor:
         if title is not None:
             thread_posts.insert(0, title)
 
-        thread_embedding = self.embedder.embed(thread_posts)
+        thread_embedding = self.embedder.embed_text_list(thread_posts)
 
         thread.semantic_embedding = thread_embedding
 

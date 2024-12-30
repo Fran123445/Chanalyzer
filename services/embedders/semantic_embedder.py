@@ -8,12 +8,12 @@ class SemanticEmbedder(Embedder):
             self.model = model
             self.aggregator = aggregator
 
-        def embed(self, text: str):
+        def embed_text(self, text: str):
             embedding = self.model.encode(text)
 
             return embedding
 
-        def embed(self, text_list: list[str]):
+        def embed_text_list(self, text_list: list[str]):
             """Generates the embedding of a list of texts by averaging the embeddings of the individual texts."""
             embeddings = self.model.encode(text_list)
 
