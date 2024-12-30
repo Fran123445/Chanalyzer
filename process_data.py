@@ -21,7 +21,7 @@ transformer = SentenceTransformer(TRANSFORMER_MODEL_NAME)
 
 aggregator = Aggregator()
 embedder = SemanticEmbedder(transformer, aggregator)
-processor = Processor(embedder, aggregator)
+processor = Processor(embedder, aggregator, sql_access, mongo_access)
 
 boards = sql_access.get_boards()
 
