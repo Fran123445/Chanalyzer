@@ -1,6 +1,7 @@
 import pymongo
 from models.board import Board
 from models.thread import Thread
+import numpy as np
 
 
 class MongoAccess:
@@ -35,7 +36,11 @@ class MongoAccess:
 
         for board in cursor:
             board_name = board["boardName"]
-            semantic_embedding = board["semanticEmbedding"]
+            semantic_embedding = np.array(board["semanticEmbedding"])
+            # If I didn't explicitly cast it here, it would be converted to an array of Python floats,
+            # which would cause a crash when doing similarity comparison as Pytorch
+            # converts floats to float32 instead of float64
+
             boards.append(Board(board_name=board_name, semantic_embedding=semantic_embedding))
 
         return boards
