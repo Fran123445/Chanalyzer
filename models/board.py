@@ -13,3 +13,9 @@ class Board:
         self.board_name = board_name
         self.threads = threads
         self.semantic_embedding = semantic_embedding
+
+    def __hash__(self):
+        return hash(self.board_name)
+
+    def __eq__(self, other):
+        return self.board_name == other.board_name
