@@ -2,7 +2,6 @@ from services.data_access.mongo.mongo_access import MongoAccess
 from services.embedders.semantic_embedder import SemanticEmbedder
 from services.matcher.matcher import Matcher
 
-
 class BoardFinder:
 
     def __init__(self, mongo_access: MongoAccess,
@@ -12,12 +11,12 @@ class BoardFinder:
         self.semantic_embedder = semantic_embedder
         self.matcher = matcher
 
-
     def find_similar_to_board(self, board_name: str, top_n: int):
         board = self.mongo_access.get_board(board_name)
         board_embedding = board.semantic_embedding
 
         top_similar_boards = self.matcher.get_top_similar_boards(board_embedding, "semantic_embedding", top_n)
+        top_similar_boards = top_similar_boards[1:]  # Remove the board itself from the list
 
         return top_similar_boards
 
