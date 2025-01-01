@@ -1,3 +1,4 @@
+import numpy as np
 import sentence_transformers.util
 
 from services.data_access.mongo.mongo_access import MongoAccess
@@ -7,7 +8,7 @@ class Matcher:
     def __init__(self, mongo_access: MongoAccess):
         self.mongo_access = mongo_access
 
-    def calculate_similarities(self, embedding: list, element_list: list, embedding_type: str):
+    def calculate_similarities(self, embedding: np.ndarray, element_list: list, embedding_type: str):
         similarity_dict = {}
 
         for element in element_list:
@@ -16,7 +17,7 @@ class Matcher:
 
         return similarity_dict
 
-    def get_top_similar_boards(self, embedding: list, embedding_type: str, top_n: int):
+    def get_top_similar_boards(self, embedding: np.ndarray, embedding_type: str, top_n: int):
         boards = self.mongo_access.get_boards()
 
         similarity_dict = self.calculate_similarities(embedding, boards, embedding_type)
