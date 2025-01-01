@@ -30,6 +30,11 @@ class MongoAccess:
 
         self.insert_threads_from_board(board)
 
+    def get_board(self, board_name: str):
+        board = self.board_collection.find_one({"boardName": board_name})
+
+        return Board(board_name=board["boardName"], semantic_embedding=np.array(board["semanticEmbedding"]))
+
     def get_boards(self):
         cursor = self.board_collection.find()
         boards = []
