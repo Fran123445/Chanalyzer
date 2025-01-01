@@ -11,8 +11,8 @@ class Matcher:
         similarity_dict = {}
 
         for element in element_list:
-            similarity = sentence_transformers.util.cos_sim(embedding, getattr(element, embedding_type))
-            similarity_dict[element] = similarity
+            similarity_tensor = sentence_transformers.util.cos_sim(embedding, getattr(element, embedding_type))
+            similarity_dict[element] = similarity_tensor.item()
 
         return similarity_dict
 
