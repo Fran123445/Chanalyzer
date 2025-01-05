@@ -27,7 +27,7 @@ async def lifespan(app: FastAPI):
     aggregator = Aggregator()
     embedder = SemanticEmbedder(transformer, aggregator)
     matcher = Matcher(mongo_access)
-    board_finder = BoardFinder(mongo_access, embedder, matcher)
+    board_finder = BoardFinder(mongo_access, embedder, matcher, "semantic_embedding")
 
     app.state.semantic_processor = Processor(embedder, aggregator, sql_access, mongo_access)
     app.state.sql_access = sql_access
