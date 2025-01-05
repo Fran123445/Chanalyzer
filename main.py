@@ -5,9 +5,11 @@ from contextlib import asynccontextmanager
 from sentence_transformers import SentenceTransformer
 
 from config import *
+from services.board_finder.board_finder import BoardFinder
 from services.data_access.mongo.mongo_access import MongoAccess
 from services.data_access.sql.sql_access import SQLAccess
 from services.embedders.semantic_embedder import SemanticEmbedder
+from services.matcher.matcher import Matcher
 from services.processor.processor import Processor
 from services.utils.aggregator import Aggregator
 
@@ -24,10 +26,13 @@ async def lifespan(app: FastAPI):
     transformer = SentenceTransformer(TRANSFORMER_MODEL_NAME)
     aggregator = Aggregator()
     embedder = SemanticEmbedder(transformer, aggregator)
+    matcher = Matcher(mongo_access)
+    board_finder = BoardFinder(mongo_access, embedder, matcher)
 
     app.state.semantic_processor = Processor(embedder, aggregator, sql_access, mongo_access)
     app.state.sql_access = sql_access
     app.state.mongo_access = mongo_access
+    app.state.board_finder = board_finder
 
     yield
 
