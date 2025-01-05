@@ -12,6 +12,7 @@ from services.embedders.semantic_embedder import SemanticEmbedder
 from services.matcher.matcher import Matcher
 from services.processor.processor import Processor
 from services.utils.aggregator import Aggregator
+from routers import board_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -41,6 +42,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Chanalyzer API", lifespan=lifespan)
+app.include_router(board_router.router)
 
 @app.get("/")
 def root():
