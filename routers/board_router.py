@@ -14,5 +14,5 @@ def get_similar_to_board(board_name: str, request:Request, top_n = 10):
     return request.app.state.board_finder.find_similar_to_board(board_name, top_n)
 
 @router.get("/similar/semantic")
-def get_similar_to_texts(text_list: list[str], request: Request, top_n = 10):
-    return request.app.state.board_finder.find_similar_to_text_list(text_list, top_n)
+def get_similar_to_texts(text_list: list[str], weights_list: list[int], request: Request, top_n = 10):
+    return request.app.state.board_finder.find_similar_to_text_list(text_list, weights_list, top_n)

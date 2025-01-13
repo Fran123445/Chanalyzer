@@ -7,5 +7,5 @@ class Embedder(ABC):
         pass
 
     @abstractmethod
-    def embed_text_list(self, text_list: list[str]):
+    def embed_text_list(self, text_list: list[str],  weights_list: list[int]):
         pass

@@ -9,8 +9,10 @@ class Aggregator:
 
         return weights
 
-    def get_average_embedding(self, embeddings: np.array):
-        weights = self._get_weights(embeddings)
+    def get_average_embedding(self, embeddings: np.array, weights: np.array = None):
+        if not weights:
+            weights = self._get_weights(embeddings)
+
         average_embedding = np.average(embeddings, axis=0, weights=weights)
 
         return average_embedding

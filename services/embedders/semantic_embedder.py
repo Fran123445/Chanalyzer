@@ -15,10 +15,10 @@ class SemanticEmbedder(Embedder):
 
             return embedding.astype(np.float64)
 
-        def embed_text_list(self, text_list: list[str]):
+        def embed_text_list(self, text_list: list[str], weights_list: list[int]):
             """Generates the embedding of a list of texts by averaging the embeddings of the individual texts."""
             embeddings = self.model.encode(text_list, convert_to_numpy=True)
 
-            average_embedding = self.aggregator.get_average_embedding(embeddings)
+            average_embedding = self.aggregator.get_average_embedding(embeddings, weights_list)
 
             return average_embedding.astype(np.float64)
