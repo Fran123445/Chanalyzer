@@ -35,3 +35,10 @@ class BoardFinder:
         top_similar_boards = self.matcher.get_top_similar_boards(text_embedding, self.embedding_type, top_n)
 
         return top_similar_boards
+
+    def find_similar_to_multiple_text_lists(self, text_lists: list[list[str]], weight_lists: list[list[int]], top_n: int):
+        text_embedding = self.embedder.embed_multiple_text_lists(text_lists, weight_lists)
+
+        top_similar_boards = self.matcher.get_top_similar_boards(text_embedding, self.embedding_type, top_n)
+
+        return top_similar_boards
